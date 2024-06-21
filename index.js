@@ -8,10 +8,11 @@ const PORT = 3000;
 const BASEURL = "https://rickandmortyapi.com/api/";
 let endpoints = {};
 
-app.use(bodyParser.json());
-
 //Use the public folder for static files.
 app.use(express.static("public"));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 
 //When the user goes to the home page it should render the index.ejs file.
