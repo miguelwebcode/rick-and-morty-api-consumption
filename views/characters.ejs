@@ -1,0 +1,28 @@
+<%- include('partials/header.ejs') %>
+<h1>Characters</h1>
+<% if(locals.info && locals.results) {%>
+
+
+    <form id="myForm" method="post">
+
+        <br>
+        <br>
+        <ul>
+            <% locals.results.forEach(character => { %>
+                <li>
+                    <a href="/characters/<%=character.id%>"><%=character.name%></a>
+                </li>
+            <% }); %>
+        </ul>
+        <br>
+        <br>
+        <% for(let i = 0; i < locals.info.pages; i++) { %>
+            <input type="submit" value="<%=i+1%>" formaction="/characters?page=<%=i+1%>" name="<%=i+1%>" />
+        <% } %>
+    </form>
+
+<% } else { %>
+<p>Not receiving content</p>
+<% } %>
+
+<%- include('partials/footer.ejs') %>
