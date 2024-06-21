@@ -18,25 +18,27 @@ app.use(express.static("public"));
 app.get("/", async (req, res) => {
     let response = await axios.get(`${BASEURL}`);
     //Store the endpoints in a global variable to be used in other routes.
-    let contentValue = [
-        {
+    let contentValue = {
+        characters: {
             name: "Characters",
             url: response.data.characters,
             description: "Get all characters"
         },
-        {
+        locations: {
             name: "Locations",
             url: response.data.locations,
             description: "Get all locations"
         },
-        {
+        episodes: {
             name: "Episodes",
             url: response.data.episodes,
             description: "Get all episodes"
         }
-    ];
+    };
     res.render("index.ejs", {content: contentValue});
 });
+
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
