@@ -43,6 +43,7 @@ app.get("/", async (req, res) => {
 app.get("/characters", async (req, res) => {
     let response = await axios.get(`${BASEURL}${endpoints.characters}`);
     console.log(response.data);
+    res.render("characters.ejs", {info: response.data.info, results: response.data.results});
 });
 
 app.get("/locations", async (req, res) => {
@@ -56,6 +57,14 @@ app.get("/episodes", async (req, res) => {
 });
 
 
+
+app.post("/characters", async (req, res) => {
+    const pageNumber = req.body.page;
+    console.log(`Page number: ${pageNumber}`);
+    let response = await axios.get(`${BASEURL}${endpoints.characters}/?page=${pageNumber}`);
+    console.log(response.data);
+    res.render("characters.ejs", {info: response.data.info, results: response.data.results});
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
