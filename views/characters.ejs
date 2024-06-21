@@ -17,7 +17,7 @@
         <br>
         <br>
         <% for(let i = 0; i < locals.info.pages; i++) { %>
-            <input type="submit" value="<%=i+1%>" formaction="/characters?page=<%=i+1%>" name="<%=i+1%>" />
+            <input type="submit" name="page" value="<%=i+1%>" formaction="/characters"  />
         <% } %>
     </form>
 
