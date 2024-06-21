@@ -8,5 +8,11 @@
   },
   "author": "Miguel",
   "license": "ISC",
-  "description": "Creation of a web page that consumes the Rick and Morty API"
+  "description": "Creation of a web page that consumes the Rick and Morty API",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  }
 }
