@@ -39,8 +39,19 @@ app.get("/", async (req, res) => {
     res.render("index.ejs", {content: contentValue});
 });
 
+
 app.get("/characters", async (req, res) => {
     let response = await axios.get(`${BASEURL}${endpoints.characters}`);
+    console.log(response.data);
+});
+
+app.get("/locations", async (req, res) => {
+    let response = await axios.get(`${BASEURL}${endpoints.locations}`);
+    console.log(response.data);
+});
+
+app.get("/episodes", async (req, res) => {
+    let response = await axios.get(`${BASEURL}${endpoints.episodes}`);
     console.log(response.data);
 });
 
