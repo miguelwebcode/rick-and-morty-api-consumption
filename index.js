@@ -6,7 +6,7 @@ import { name } from 'ejs';
 const app = express();
 const PORT = 3000;
 const BASEURL = "https://rickandmortyapi.com/api/";
-let endpoints = {};
+let endpoints = {characters: "character", locations: "location", episodes: "episode"};
 
 //Use the public folder for static files.
 app.use(express.static("public"));
@@ -37,6 +37,11 @@ app.get("/", async (req, res) => {
         }
     };
     res.render("index.ejs", {content: contentValue});
+});
+
+app.get("/characters", async (req, res) => {
+    let response = await axios.get(`${BASEURL}${endpoints.characters}`);
+    console.log(response.data);
 });
 
 
