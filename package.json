@@ -1,0 +1,12 @@
+{
+  "name": "rick_and_morty_api_integration",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Miguel",
+  "license": "ISC",
+  "description": "Creation of a web page that consumes the Rick and Morty API"
+}
