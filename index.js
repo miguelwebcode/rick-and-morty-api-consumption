@@ -114,6 +114,18 @@ app.post("/getCharacterById", async (req, res) => {
     }
 });
 
+app.post("/getLocationById", async (req, res) => {
+    console.log("Get location by id");
+    console.log(req.body);
+    try {
+        let response = await axios.get(`${BASEURL}${endpoints.locations}/${req.body.locationId}`);
+        console.log(response.data);
+        res.render("location-detail.ejs", {location: response.data});
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
