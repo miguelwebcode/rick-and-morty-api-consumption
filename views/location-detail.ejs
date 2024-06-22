@@ -1,0 +1,9 @@
+<%- include('partials/header.ejs') %>
+<%if(locals.location){%>
+    <h1><%=locals.location.name%></h1>
+    <p>Type: <%=locals.location.type%></p>
+    <p>Dimension: <%=locals.location.dimension%></p>
+<%} else {%>
+    <p>Not receiving content</p>
+<%}%>
+<%- include('partials/footer.ejs') %>
