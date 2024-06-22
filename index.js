@@ -17,53 +17,74 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //When the user goes to the home page it should render the index.ejs file.
 app.get("/", async (req, res) => {
-    let response = await axios.get(`${BASEURL}`);
-    //Store the endpoints in a global variable to be used in other routes.
-    let contentValue = {
-        characters: {
-            name: "Characters",
-            url: response.data.characters,
-            description: "Get all characters"
-        },
-        locations: {
-            name: "Locations",
-            url: response.data.locations,
-            description: "Get all locations"
-        },
-        episodes: {
-            name: "Episodes",
-            url: response.data.episodes,
-            description: "Get all episodes"
-        }
-    };
-    res.render("index.ejs", {content: contentValue});
+    try {
+        let response = await axios.get(`${BASEURL}`);
+        //Store the endpoints in a global variable to be used in other routes.
+        let contentValue = {
+            characters: {
+                name: "Characters",
+                url: response.data.characters,
+                description: "Get all characters"
+            },
+            locations: {
+                name: "Locations",
+                url: response.data.locations,
+                description: "Get all locations"
+            },
+            episodes: {
+                name: "Episodes",
+                url: response.data.episodes,
+                description: "Get all episodes"
+            }
+        };
+        res.render("index.ejs", {content: contentValue});
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 
 app.get("/characters", async (req, res) => {
-    let response = await axios.get(`${BASEURL}${endpoints.characters}`);
-    console.log(response.data);
-    res.render("characters.ejs", {info: response.data.info, results: response.data.results});
+    try {
+        let response = await axios.get(`${BASEURL}${endpoints.characters}`);
+        console.log(response.data);
+        res.render("characters.ejs", {info: response.data.info, results: response.data.results});
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 app.get("/locations", async (req, res) => {
-    let response = await axios.get(`${BASEURL}${endpoints.locations}`);
-    console.log(response.data);
+    try {
+        let response = await axios.get(`${BASEURL}${endpoints.locations}`);
+        console.log(response.data);
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 app.get("/episodes", async (req, res) => {
-    let response = await axios.get(`${BASEURL}${endpoints.episodes}`);
-    console.log(response.data);
+    try {
+        let response = await axios.get(`${BASEURL}${endpoints.episodes}`);
+        console.log(response.data);       
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 
 
 app.post("/characters", async (req, res) => {
-    const pageNumber = req.body.page;
-    console.log(`Page number: ${pageNumber}`);
-    let response = await axios.get(`${BASEURL}${endpoints.characters}/?page=${pageNumber}`);
-    console.log(response.data);
-    res.render("characters.ejs", {info: response.data.info, results: response.data.results});
+    try {
+        const pageNumber = req.body.page;
+        console.log(`Page number: ${pageNumber}`);
+        let response = await axios.get(`${BASEURL}${endpoints.characters}/?page=${pageNumber}`);
+        console.log(response.data);
+        res.render("characters.ejs", {info: response.data.info, results: response.data.results});
+    } catch (error) {
+        console.log(error);
+    }
+    
 });
 
 app.post("/getCharacterById", async (req, res) => {
