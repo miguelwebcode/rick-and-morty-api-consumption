@@ -1,0 +1,31 @@
+<%- include('partials/header.ejs') %>
+<h1>Locations</h1>
+<% if(locals.info && locals.results) {%>
+    <br>
+    <br>
+    <ul>
+        <% locals.results.forEach(location => { %>
+            <li>
+                <form id="myForm" method="post" >
+                    <input type="submit" value="<%=location.name%>" formaction="/getLocationById">
+                    <input type="hidden" name="locationId" value= "<%=location.id%>">
+                </form> 
+
+            </li>
+        <% }); %>
+    </ul>
+    <br>
+    <br>
+    <br>
+    <form id="myForm" method="post">
+
+        <% for(let i = 0; i < locals.info.pages; i++) { %>
+            <input type="submit" name="page" value="<%=i+1%>" formaction="/locations"  />
+        <% } %>
+    </form>
+
+<% } else { %>
+<p>Not receiving content</p>
+<% } %>
+
+<%- include('partials/footer.ejs') %>
