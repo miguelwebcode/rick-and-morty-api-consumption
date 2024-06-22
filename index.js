@@ -58,6 +58,8 @@ app.get("/locations", async (req, res) => {
     try {
         let response = await axios.get(`${BASEURL}${endpoints.locations}`);
         console.log(response.data);
+        res.render("locations.ejs", {info: response.data.info, results: response.data.results});
+
     } catch (error) {
         console.log(error);
     }
@@ -81,6 +83,19 @@ app.post("/characters", async (req, res) => {
         let response = await axios.get(`${BASEURL}${endpoints.characters}/?page=${pageNumber}`);
         console.log(response.data);
         res.render("characters.ejs", {info: response.data.info, results: response.data.results});
+    } catch (error) {
+        console.log(error);
+    }
+    
+});
+
+app.post("/locations", async (req, res) => {
+    try {
+        const pageNumber = req.body.page;
+        console.log(`Page number: ${pageNumber}`);
+        let response = await axios.get(`${BASEURL}${endpoints.locations}/?page=${pageNumber}`);
+        console.log(response.data);
+        res.render("locations.ejs", {info: response.data.info, results: response.data.results});
     } catch (error) {
         console.log(error);
     }
