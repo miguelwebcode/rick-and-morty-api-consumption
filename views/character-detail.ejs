@@ -1,0 +1,28 @@
+<%- include('partials/header.ejs') %>
+<%if(locals.character){%>
+    <h1><%=locals.character.name%></h1>
+    <img src="<%=locals.character.image%>" alt="<%=locals.character.name%>">
+    <p>Status: <%=locals.character.status%></p>
+    <p>Species: <%=locals.character.species%></p>
+    <p>Gender: <%=locals.character.gender%></p>
+    <p>Origin: <%=locals.character.origin.name%></p>
+    <p>Location: <%=locals.character.location.name%></p>
+    <p>Episodes: </p>
+    <ul>
+        <%locals.character.episode.forEach(episode => {%>
+            <li>
+                <form id="myForm" method="post" >
+                    <% 
+                        let parts = episode.split('/');
+                        let episodeNumber = parts[parts.length - 1];      
+                    %>
+                    <input type="submit" value="Episode <%= episodeNumber%>" formaction="/getEpisodeById">
+                    <input type="hidden" name="episodeId" value= "<%=episodeNumber%>">
+                </form> 
+            </li>
+        <%});%>
+    </ul>
+<%} else {%>
+    <p>Not receiving content</p>
+<%}%>
+<%- include('partials/footer.ejs') %>
