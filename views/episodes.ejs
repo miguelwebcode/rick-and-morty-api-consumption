@@ -1,0 +1,36 @@
+<%- include('partials/header.ejs') %>
+<h1>Episodes</h1>
+<% if(locals.info && locals.results) {%>
+
+
+
+    <br>
+    <br>
+
+
+    <ul>
+        <% locals.results.forEach(episode => { %>
+            <li>
+                <form id="myForm" method="post" >
+                <input type="submit" value="<%=episode.name%>" formaction="/getEpisodeById">
+                <input type="hidden" name="episodeId" value= "<%=episode.id%>">
+                </form> 
+
+            </li>
+        <% }); %>
+    </ul>
+    <br>
+    <br>
+    <br>
+    <form id="myForm" method="post">
+
+        <% for(let i = 0; i < locals.info.pages; i++) { %>
+            <input type="submit" name="page" value="<%=i+1%>" formaction="/episodes"  />
+        <% } %>
+    </form>
+
+<% } else { %>
+<p>Not receiving content</p>
+<% } %>
+
+<%- include('partials/footer.ejs') %>
