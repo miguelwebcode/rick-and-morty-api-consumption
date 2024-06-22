@@ -66,6 +66,18 @@ app.post("/characters", async (req, res) => {
     res.render("characters.ejs", {info: response.data.info, results: response.data.results});
 });
 
+app.post("/getCharacterById", async (req, res) => {
+    console.log("Get character by id");
+    console.log(req.body);
+    try {
+        let response = await axios.get(`${BASEURL}${endpoints.characters}/${req.body.characterId}`);
+        console.log(response.data);
+        res.render("character-detail.ejs", {character: response.data});
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
