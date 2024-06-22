@@ -1,0 +1,10 @@
+<%- include('partials/header.ejs') %>
+<%if(locals.episode){%>
+    <h1><%=locals.episode.name%></h1>
+    <p>Air date: <%=locals.episode.air_date%></p>
+    <p>Episode: <%=locals.episode.episode%></p>
+
+<%} else {%>
+    <p>Not receiving content</p>
+<%}%>
+<%- include('partials/footer.ejs') %>
