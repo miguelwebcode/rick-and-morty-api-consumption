@@ -3,19 +3,27 @@
 <% if(locals.info && locals.results) {%>
 
 
-    <form id="myForm" method="post">
 
         <br>
         <br>
+    
+
         <ul>
             <% locals.results.forEach(character => { %>
                 <li>
-                    <a href="/characters/<%=character.id%>"><%=character.name%></a>
+                    <form id="myForm" method="post" >
+                    <input type="submit" value="<%=character.name%>" formaction="/getCharacterById">
+                    <input type="hidden" name="characterId" value= "<%=character.id%>">
+                    </form> 
+
                 </li>
             <% }); %>
         </ul>
         <br>
         <br>
+        <br>
+    <form id="myForm" method="post">
+
         <% for(let i = 0; i < locals.info.pages; i++) { %>
             <input type="submit" name="page" value="<%=i+1%>" formaction="/characters"  />
         <% } %>
