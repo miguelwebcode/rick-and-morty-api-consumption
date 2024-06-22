@@ -68,7 +68,8 @@ app.get("/locations", async (req, res) => {
 app.get("/episodes", async (req, res) => {
     try {
         let response = await axios.get(`${BASEURL}${endpoints.episodes}`);
-        console.log(response.data);       
+        console.log(response.data);
+        res.render("episodes.ejs", {info: response.data.info, results: response.data.results});    
     } catch (error) {
         console.log(error);
     }
@@ -102,6 +103,19 @@ app.post("/locations", async (req, res) => {
     
 });
 
+app.post("/episodes", async (req, res) => {
+    try {
+        const pageNumber = req.body.page;
+        console.log(`Page number: ${pageNumber}`);
+        let response = await axios.get(`${BASEURL}${endpoints.episodes}/?page=${pageNumber}`);
+        console.log(response.data);
+        res.render("episodes.ejs", {info: response.data.info, results: response.data.results});
+    } catch (error) {
+        console.log(error);
+    }
+    
+});
+
 app.post("/getCharacterById", async (req, res) => {
     console.log("Get character by id");
     console.log(req.body);
@@ -121,6 +135,18 @@ app.post("/getLocationById", async (req, res) => {
         let response = await axios.get(`${BASEURL}${endpoints.locations}/${req.body.locationId}`);
         console.log(response.data);
         res.render("location-detail.ejs", {location: response.data});
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.post("/getEpisodeById", async (req, res) => {
+    console.log("Get episode by id");
+    console.log(req.body);
+    try {
+        let response = await axios.get(`${BASEURL}${endpoints.episodes}/${req.body.episodeId}`);
+        console.log(response.data);
+        res.render("episode-detail.ejs", {episode: response.data});
     } catch (error) {
         console.log(error);
     }
