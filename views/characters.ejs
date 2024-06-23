@@ -1,13 +1,6 @@
 <%- include('partials/header.ejs') %>
 <h1>Characters</h1>
 <% if(locals.info && locals.results) {%>
-
-
-
-        <br>
-        <br>
-    
-
         <ul>
             <% locals.results.forEach(character => { %>
                 <li>
@@ -19,7 +12,6 @@
                 </li>
             <% }); %>
         </ul>
-        <br>
         <br>
         <br>
     <form id="myForm" method="post">

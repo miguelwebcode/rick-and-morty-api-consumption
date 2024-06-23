@@ -1,14 +1,15 @@
 <%- include('partials/header.ejs') %>
-<h1>Web app that consumes the Rick and Morty API</h1>
+<h1 class="pageTitle">Web app that consumes the Rick and Morty API</h1>
+    
+
 <% if(locals.content) {%>
-
-
     <form id="myForm" method="get">
-
-        <input id="charactersInput" type="submit" value="<%=content.characters.name %>" formaction="/characters" />
-        <input id="locationsInput" type="submit" value="<%=content.locations.name %>" formaction="/locations" />
-        <input id="episodesInput" type="submit" value="<%=content.episodes.name %>" formaction="/episodes" />
-        </form>
+        <div class="categoriesContainer">
+            <input id="charactersInput" class="category" type="submit" value="<%=content.characters.name %>" formaction="/characters" />
+            <input id="locationsInput" class="category" type="submit" value="<%=content.locations.name %>" formaction="/locations" />
+            <input id="episodesInput" class="category" type="submit" value="<%=content.episodes.name %>" formaction="/episodes" />
+        </div>
+    </form>
 <% } else { %>
 <p>Not receiving content</p>
 <% } %>
