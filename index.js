@@ -124,6 +124,13 @@ app.post("/getCharacterById", async (req, res) => {
         let arrayOfEpisodeNumbers = getArrayOfIds(response.data.episode);
         let getMultipleEpisodes = await axios.get(`${BASEURL}${endpoints.episodes}/${arrayOfEpisodeNumbers}`);
         response.data.episode = getMultipleEpisodes.data;
+        let locationId = response.data.location.url.split("/").pop();
+        let originId = response.data.origin.url.split("/").pop();
+        let getLocation = await axios.get(`${BASEURL}${endpoints.locations}/${locationId}`);
+        let getOrigin = await axios.get(`${BASEURL}${endpoints.locations}/${originId}`);
+        response.data.location = getLocation.data;
+        response.data.origin = getOrigin.data;
+        console.log("Get character by id response data:");
         console.log(response.data);
         res.render("character-detail.ejs", {character: response.data});
     } catch (error) {
