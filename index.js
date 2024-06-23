@@ -121,6 +121,9 @@ app.post("/getCharacterById", async (req, res) => {
     console.log(req.body);
     try {
         let response = await axios.get(`${BASEURL}${endpoints.characters}/${req.body.characterId}`);
+        let arrayOfEpisodeNumbers = calculateEpisodeNumbers(response.data.episode);
+        let getMultipleEpisodes = await axios.get(`${BASEURL}${endpoints.episodes}/${arrayOfEpisodeNumbers}`);
+        response.data.episode = getMultipleEpisodes.data;
         console.log(response.data);
         res.render("character-detail.ejs", {character: response.data});
     } catch (error) {
@@ -155,3 +158,13 @@ app.post("/getEpisodeById", async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+
+function calculateEpisodeNumbers(episodeArray) {
+    let episodeNumbers = [];
+    episodeArray.forEach(episode => {
+        let episodeNumber = episode.split("/").pop();
+        episodeNumbers.push(episodeNumber);
+    });
+    return episodeNumbers;
+};
