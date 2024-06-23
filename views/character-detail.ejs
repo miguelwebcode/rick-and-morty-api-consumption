@@ -3,27 +3,28 @@
     <div class="characterDetailBody">
         <div class="characterDetailContainer">
             <h1><%=locals.character.name%></h1>
-            <img src="<%=locals.character.image%>" alt="<%=locals.character.name%>">
-            <p>Status: <%=locals.character.status%></p>
-            <p>Species: <%=locals.character.species%></p>
-            <p>Gender: <%=locals.character.gender%></p>
-            <p>Origin:
-            <% console.log(character.origin);%>
-            <% if(character.origin.name === "Unknown") { %>
-                Unknown
-            <% } else {%>
+            <img class="characterDetailImg" src="<%=locals.character.image%>" alt="<%=locals.character.name%>">
+            <div class="characterData">
+                <p>Status: <%=locals.character.status%></p>
+                <p>Species: <%=locals.character.species%></p>
+                <p>Gender: <%=locals.character.gender%></p>
+                <p>Origin:
+                <% console.log(character.origin);%>
+                <% if(character.origin.name === "Unknown") { %>
+                    Unknown
+                <% } else {%>
+                    <form id="myForm" method="post" >
+                        <input type="submit" value="<%=character.origin.name%>" formaction="/getLocationById">
+                        <input type="hidden" name="locationId" value= "<%=character.origin.id%>">
+                    </form>
+                <%}%>
+                </p>
+                <p>Location:</p>
                 <form id="myForm" method="post" >
-                    <input type="submit" value="<%=character.origin.name%>" formaction="/getLocationById">
-                    <input type="hidden" name="locationId" value= "<%=character.origin.id%>">
+                    <input type="submit" value="<%=character.location.name%>" formaction="/getLocationById">
+                    <input type="hidden" name="locationId" value= "<%=character.location.id%>">
                 </form>
-            <%}%>
-            </p>
-        
-            <p>Location:</p>
-            <form id="myForm" method="post" >
-                <input type="submit" value="<%=character.location.name%>" formaction="/getLocationById">
-                <input type="hidden" name="locationId" value= "<%=character.location.id%>">
-            </form>
+            </div>
         </div>
     </div>
     <p>Episodes: </p>
