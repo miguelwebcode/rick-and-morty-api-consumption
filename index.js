@@ -47,7 +47,6 @@ app.get("/", async (req, res) => {
 app.get("/characters", async (req, res) => {
     try {
         let response = await axios.get(`${BASEURL}${endpoints.characters}`);
-        console.log(response.data);
         res.render("characters.ejs", {info: response.data.info, results: response.data.results});
     } catch (error) {
         console.log(error);
@@ -57,7 +56,6 @@ app.get("/characters", async (req, res) => {
 app.get("/locations", async (req, res) => {
     try {
         let response = await axios.get(`${BASEURL}${endpoints.locations}`);
-        console.log(response.data);
         res.render("locations.ejs", {info: response.data.info, results: response.data.results});
 
     } catch (error) {
@@ -68,7 +66,6 @@ app.get("/locations", async (req, res) => {
 app.get("/episodes", async (req, res) => {
     try {
         let response = await axios.get(`${BASEURL}${endpoints.episodes}`);
-        console.log(response.data);
         res.render("episodes.ejs", {info: response.data.info, results: response.data.results});    
     } catch (error) {
         console.log(error);
@@ -80,9 +77,7 @@ app.get("/episodes", async (req, res) => {
 app.post("/characters", async (req, res) => {
     try {
         const pageNumber = req.body.page;
-        console.log(`Page number: ${pageNumber}`);
         let response = await axios.get(`${BASEURL}${endpoints.characters}/?page=${pageNumber}`);
-        console.log(response.data);
         res.render("characters.ejs", {info: response.data.info, results: response.data.results});
     } catch (error) {
         console.log(error);
@@ -93,9 +88,7 @@ app.post("/characters", async (req, res) => {
 app.post("/locations", async (req, res) => {
     try {
         const pageNumber = req.body.page;
-        console.log(`Page number: ${pageNumber}`);
         let response = await axios.get(`${BASEURL}${endpoints.locations}/?page=${pageNumber}`);
-        console.log(response.data);
         res.render("locations.ejs", {info: response.data.info, results: response.data.results});
     } catch (error) {
         console.log(error);
@@ -106,9 +99,7 @@ app.post("/locations", async (req, res) => {
 app.post("/episodes", async (req, res) => {
     try {
         const pageNumber = req.body.page;
-        console.log(`Page number: ${pageNumber}`);
         let response = await axios.get(`${BASEURL}${endpoints.episodes}/?page=${pageNumber}`);
-        console.log(response.data);
         res.render("episodes.ejs", {info: response.data.info, results: response.data.results});
     } catch (error) {
         console.log(error);
@@ -117,21 +108,32 @@ app.post("/episodes", async (req, res) => {
 });
 
 app.post("/getCharacterById", async (req, res) => {
-    console.log("Get character by id");
-    console.log(req.body);
     try {
         let response = await axios.get(`${BASEURL}${endpoints.characters}/${req.body.characterId}`);
         let arrayOfEpisodeNumbers = getArrayOfIds(response.data.episode);
         let getMultipleEpisodes = await axios.get(`${BASEURL}${endpoints.episodes}/${arrayOfEpisodeNumbers}`);
         response.data.episode = getMultipleEpisodes.data;
+        //Check if response.data.episode is array
+        if(!Array.isArray(response.data.episode)) {
+            response.data.episode = [response.data.episode];
+        }
+
         let locationId = response.data.location.url.split("/").pop();
         let originId = response.data.origin.url.split("/").pop();
         let getLocation = await axios.get(`${BASEURL}${endpoints.locations}/${locationId}`);
         let getOrigin = await axios.get(`${BASEURL}${endpoints.locations}/${originId}`);
-        response.data.location = getLocation.data;
-        response.data.origin = getOrigin.data;
-        console.log("Get character by id response data:");
-        console.log(response.data);
+        if(response.data.location.name === "unknown") {
+            response.data.location.name = "Unknown";
+
+        } else {
+            response.data.location = getLocation.data;
+        }
+        if (response.data.origin.name === "unknown") {
+            response.data.origin.name = "Unknown";
+        } else {
+            response.data.origin = getOrigin.data;
+        }
+        
         res.render("character-detail.ejs", {character: response.data});
     } catch (error) {
         console.log(error);
@@ -139,14 +141,11 @@ app.post("/getCharacterById", async (req, res) => {
 });
 
 app.post("/getLocationById", async (req, res) => {
-    console.log("Get location by id");
-    console.log(req.body);
     try {
         let response = await axios.get(`${BASEURL}${endpoints.locations}/${req.body.locationId}`);
         let arrayOfResidentIds = getArrayOfIds(response.data.residents);
         let getMultipleResidents = await axios.get(`${BASEURL}${endpoints.characters}/${arrayOfResidentIds}`);
         response.data.residents = getMultipleResidents.data;
-        console.log(response.data);
         res.render("location-detail.ejs", {location: response.data});
     } catch (error) {
         console.log(error);
@@ -154,14 +153,11 @@ app.post("/getLocationById", async (req, res) => {
 });
 
 app.post("/getEpisodeById", async (req, res) => {
-    console.log("Get episode by id");
-    console.log(req.body);
     try {
         let response = await axios.get(`${BASEURL}${endpoints.episodes}/${req.body.episodeId}`);
         let arrayOfCharacterIds = getArrayOfIds(response.data.characters);
         let getMultipleCharacters = await axios.get(`${BASEURL}${endpoints.characters}/${arrayOfCharacterIds}`);
         response.data.characters = getMultipleCharacters.data;
-        console.log(response.data);
         res.render("episode-detail.ejs", {episode: response.data});
     } catch (error) {
         console.log(error);
