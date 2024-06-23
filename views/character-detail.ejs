@@ -12,13 +12,9 @@
         <%locals.character.episode.forEach(episode => {%>
             <li>
                 <form id="myForm" method="post" >
-                    <% 
-                        let parts = episode.split('/');
-                        let episodeNumber = parts[parts.length - 1];      
-                    %>
-                    <input type="submit" value="Episode <%= episodeNumber%>" formaction="/getEpisodeById">
-                    <input type="hidden" name="episodeId" value= "<%=episodeNumber%>">
-                </form> 
+                    <input type="submit" value="<%= episode.id%>: <%=episode.name%>" formaction="/getEpisodeById">
+                    <input type="hidden" name="episodeId" value= "<%=episode.id%>">
+                </form>
             </li>
         <%});%>
     </ul>
