@@ -3,7 +3,16 @@
     <h1><%=locals.episode.name%></h1>
     <p>Air date: <%=locals.episode.air_date%></p>
     <p>Episode: <%=locals.episode.episode%></p>
-
+    <ul>
+        <%locals.episode.characters.forEach(character => {%>
+            <li>
+                <form id="myForm" method="post" >
+                    <input type="submit" value="<%=character.name%>" formaction="/getCharacterById">
+                    <input type="hidden" name="characterId" value= "<%=character.id%>">
+                </form>
+            </li>
+        <%});%>
+    </ul>
 <%} else {%>
     <p>Not receiving content</p>
 <%}%>

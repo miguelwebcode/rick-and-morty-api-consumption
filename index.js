@@ -151,6 +151,9 @@ app.post("/getEpisodeById", async (req, res) => {
     console.log(req.body);
     try {
         let response = await axios.get(`${BASEURL}${endpoints.episodes}/${req.body.episodeId}`);
+        let arrayOfCharacterIds = getArrayOfIds(response.data.characters);
+        let getMultipleCharacters = await axios.get(`${BASEURL}${endpoints.characters}/${arrayOfCharacterIds}`);
+        response.data.characters = getMultipleCharacters.data;
         console.log(response.data);
         res.render("episode-detail.ejs", {episode: response.data});
     } catch (error) {
