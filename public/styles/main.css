@@ -25,6 +25,18 @@
 
 }
 
+.characterDetailContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  width: 100vw;
+
+
+}
+
 .characterDiv {
   display: flex;
   flex-direction: column;
