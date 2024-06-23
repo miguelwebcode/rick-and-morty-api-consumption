@@ -3,6 +3,16 @@
     <h1><%=locals.location.name%></h1>
     <p>Type: <%=locals.location.type%></p>
     <p>Dimension: <%=locals.location.dimension%></p>
+    <ul>
+    <% locals.location.residents.forEach(resident => { %>
+        <li>
+            <form id="myForm" method="post" >
+                <input type="submit" value="<%=resident.name%>" formaction="/getCharacterById">
+                <input type="hidden" name="characterId" value= "<%=resident.id%>">
+            </form>
+        </li>
+    <% }); %>
+    </ul>
 <%} else {%>
     <p>Not receiving content</p>
 <%}%>
