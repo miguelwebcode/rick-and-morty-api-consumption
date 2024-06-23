@@ -5,8 +5,16 @@
     <p>Status: <%=locals.character.status%></p>
     <p>Species: <%=locals.character.species%></p>
     <p>Gender: <%=locals.character.gender%></p>
-    <p>Origin: <%=locals.character.origin.name%></p>
-    <p>Location: <%=locals.character.location.name%></p>
+    <p>Origin:</p>
+    <form id="myForm" method="post" >
+        <input type="submit" value="<%=character.origin.name%>" formaction="/getLocationById">
+        <input type="hidden" name="locationId" value= "<%=character.origin.id%>">
+    </form>
+    <p>Location:</p>
+    <form id="myForm" method="post" >
+        <input type="submit" value="<%=character.location.name%>" formaction="/getLocationById">
+        <input type="hidden" name="locationId" value= "<%=character.location.id%>">
+    </form>
     <p>Episodes: </p>
     <ul>
         <%locals.character.episode.forEach(episode => {%>
