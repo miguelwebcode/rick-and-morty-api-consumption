@@ -121,7 +121,7 @@ app.post("/getCharacterById", async (req, res) => {
     console.log(req.body);
     try {
         let response = await axios.get(`${BASEURL}${endpoints.characters}/${req.body.characterId}`);
-        let arrayOfEpisodeNumbers = calculateEpisodeNumbers(response.data.episode);
+        let arrayOfEpisodeNumbers = getArrayOfIds(response.data.episode);
         let getMultipleEpisodes = await axios.get(`${BASEURL}${endpoints.episodes}/${arrayOfEpisodeNumbers}`);
         response.data.episode = getMultipleEpisodes.data;
         console.log(response.data);
@@ -136,6 +136,9 @@ app.post("/getLocationById", async (req, res) => {
     console.log(req.body);
     try {
         let response = await axios.get(`${BASEURL}${endpoints.locations}/${req.body.locationId}`);
+        let arrayOfResidentIds = getArrayOfIds(response.data.residents);
+        let getMultipleResidents = await axios.get(`${BASEURL}${endpoints.characters}/${arrayOfResidentIds}`);
+        response.data.residents = getMultipleResidents.data;
         console.log(response.data);
         res.render("location-detail.ejs", {location: response.data});
     } catch (error) {
@@ -160,11 +163,11 @@ app.listen(PORT, () => {
 });
 
 
-function calculateEpisodeNumbers(episodeArray) {
-    let episodeNumbers = [];
-    episodeArray.forEach(episode => {
+function getArrayOfIds(array) {
+    let arrayOfIds = [];
+    array.forEach(episode => {
         let episodeNumber = episode.split("/").pop();
-        episodeNumbers.push(episodeNumber);
+        arrayOfIds.push(episodeNumber);
     });
-    return episodeNumbers;
+    return arrayOfIds;
 };
