@@ -1,17 +1,31 @@
 <%- include('partials/header.ejs') %>
 <%if(locals.episode){%>
-    <h1><%=locals.episode.name%></h1>
-    <p>Air date: <%=locals.episode.air_date%></p>
-    <p>Episode: <%=locals.episode.episode%></p>
-    <ul>
-        <%locals.episode.characters.forEach(character => {%>
-            <li>
-                <form id="myForm" method="post" >
-                    <input type="submit" value="<%=character.name%>" formaction="/getCharacterById">
-                    <input type="hidden" name="characterId" value= "<%=character.id%>">
-                </form>
-            </li>
-        <%});%>
+    <div class="characterDetailContainer">
+        <h1 class="pageTitle"><%=locals.episode.name%></h1>
+        <div class="characterData">
+            <div class="propertyContainer">
+                <p class="propertyParagraph">Air date: </p><p class="dataParagraph"><%=locals.episode.air_date%></p>
+            </div>
+            <div class="propertyContainer">
+                <p class="propertyParagraph">Episode: </p><p class="dataParagraph"><%=locals.episode.episode%></p>
+            </div>
+        </div>
+    </div>
+    <p class="pageSubtitle">Participants: </p>
+    <ul class="noPointsUl">
+        <div class="episodesContainer">
+            <%locals.episode.characters.forEach(character => {%>
+                <li>
+                    <div class="characterDiv">
+                        <img class="characterImage" src="<%=character.image%>" alt="<%=character.name%>">
+                        <form id="myForm" method="post" >
+                            <input type="submit" value="<%=character.name%>" formaction="/getCharacterById">
+                            <input type="hidden" name="characterId" value= "<%=character.id%>">
+                        </form>
+                    </div>
+                </li>
+            <% }); %>
+        </div>
     </ul>
 <%} else {%>
     <p>Not receiving content</p>
