@@ -1,17 +1,31 @@
 <%- include('partials/header.ejs') %>
 <%if(locals.location){%>
-    <h1><%=locals.location.name%></h1>
-    <p>Type: <%=locals.location.type%></p>
-    <p>Dimension: <%=locals.location.dimension%></p>
-    <ul>
-    <% locals.location.residents.forEach(resident => { %>
-        <li>
-            <form id="myForm" method="post" >
-                <input type="submit" value="<%=resident.name%>" formaction="/getCharacterById">
-                <input type="hidden" name="characterId" value= "<%=resident.id%>">
-            </form>
-        </li>
-    <% }); %>
+    <div class="characterDetailContainer">
+        <h1 class="pageTitle"><%=locals.location.name%></h1>
+        <div class="characterData">
+            <div class="propertyContainer">
+                <p class="propertyParagraph">Type: </p><p class="dataParagraph"><%=locals.location.type%></p>
+            </div>
+            <div class="propertyContainer">
+                <p class="propertyParagraph">Dimension: </p><p class="dataParagraph"><%=locals.location.dimension%></p>
+            </div>
+        </div>
+    </div>
+    <p class="pageSubtitle">Residents: </p>
+    <ul class="noPointsUl">
+        <div class="episodesContainer">
+            <% locals.location.residents.forEach(resident => { %>
+                <li>
+                    <div class="characterDiv">
+                        <img class="characterImage" src="<%=resident.image%>" alt="<%=resident.name%>">
+                        <form id="myForm" method="post" >
+                            <input class="episodeButton" type="submit" value="<%=resident.name%>" formaction="/getCharacterById">
+                            <input type="hidden" name="characterId" value= "<%=resident.id%>">
+                        </form>
+                    </div>
+                </li>
+            <% }); %>
+        </div>
     </ul>
 <%} else {%>
     <p>Not receiving content</p>
