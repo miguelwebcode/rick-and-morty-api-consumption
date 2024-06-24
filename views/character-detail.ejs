@@ -17,7 +17,7 @@
                 <div class="propertyContainer">
                     <p class="propertyParagraph">Origin: </p>
                     <% if(character.origin.name === "Unknown") { %>
-                        <p class="categoryProperty">Unknown</p>   
+                        <p class="unknownLocation">Unknown</p>   
                     <% } else {%>
                         <form id="myForm" method="post" >
                             <input class="linkButton" type="submit" value="<%=character.origin.name%>" formaction="/getLocationById">
@@ -28,7 +28,7 @@
                 <div class="propertyContainer">
                     <p class="propertyParagraph">Location:</p>
                     <% if(character.location.name === "Unknown") { %>
-                        <p class="categoryProperty">Unknown</p>   
+                        <p class="unknownLocation">Unknown</p>   
                     <% } else {%>
                         <form id="myForm" method="post" >
                             <input class="linkButton" type="submit" value="<%=character.location.name%>" formaction="/getLocationById">
