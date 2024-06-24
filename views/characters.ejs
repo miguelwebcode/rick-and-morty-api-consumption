@@ -19,7 +19,7 @@
 
         <div class="paginationContainer">
             <% for(let i = 0; i < locals.info.pages; i++) { %>
-                <input class="episodeButton" type="submit" name="page" value="<%=i+1%>" formaction="/characters"  />
+                <input class="episodeButton pageNumber" type="submit" name="page" value="<%=i+1%>" formaction="/characters"  />
             <% } %>
         </div>
     </form>

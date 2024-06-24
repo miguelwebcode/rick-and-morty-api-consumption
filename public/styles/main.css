@@ -148,6 +148,7 @@ nav {
 
 .paginationContainer {
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 100px;
   justify-content: center;
 }
@@ -203,3 +204,10 @@ nav {
   
 }
 
+.pageNumber {
+  width: 50px;
+}
+
+#myForm {
+  margin-bottom: 100px;
+}
