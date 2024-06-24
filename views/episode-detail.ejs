@@ -19,7 +19,7 @@
                     <div class="characterDiv">
                         <img class="characterImage" src="<%=character.image%>" alt="<%=character.name%>">
                         <form id="myForm" method="post" >
-                            <input type="submit" value="<%=character.name%>" formaction="/getCharacterById">
+                            <input class="episodeButton" type="submit" value="<%=character.name%>" formaction="/getCharacterById">
                             <input type="hidden" name="characterId" value= "<%=character.id%>">
                         </form>
                     </div>
