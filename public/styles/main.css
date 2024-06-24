@@ -44,9 +44,9 @@
 }
 
 .characterData {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   justify-content: center;
 }
 
@@ -60,7 +60,20 @@
   width: 200px;
 
 }
+.propertyContainer {
+  display: flex;
+  flex-direction: row; /* Por defecto, pero lo incluimos para mayor claridad */
+  justify-content: space-between; /* Distribuye el espacio entre los elementos */
+}
 
+.propertyParagraph, .dataParagraph {
+  margin: 0; /* Elimina los márgenes predeterminados */
+  padding: 5px; /* Añade un relleno alrededor del texto */
+}
+
+.propertyParagraph {
+  font-weight: bold; /* Pone en negrita el texto */
+}
 
 
 .pageTitle {
@@ -70,8 +83,15 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.pageSubtitle {
+  font-size: 30px;
+  margin-top: 30px;
+  text-align: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 
-.category, .characterName {
+
+.category {
   background-color: #3f3a3a;
   border: 1px solid #dcdcdc;
   border-radius: 8px;
@@ -80,16 +100,16 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
   color: #fff;
+  width: 200px;
+  height: 100px;
+  font-size: 20px;
 }
 
-.category:hover, .characterName:hover {
+
+.category:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   
-}
-
-.characterName {
-  padding: 10px;
 }
 
 
@@ -130,5 +150,56 @@ nav {
   display: flex;
   margin-bottom: 100px;
   justify-content: center;
+}
+
+
+.linkButton {
+  background: none;
+  color: blue;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  line-height: 2; /* Pone el link button a la altura de la property */
+}
+
+.linkButton:hover {
+  color: darkblue;
+}
+
+.episodesContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+  margin-bottom: 100px;
+}
+
+.noPointsUl {
+  list-style-type: none;
+}
+
+.episodeButton, .characterName {
+  padding: 0px;
+}
+
+.episodeButton, .characterName {
+  background-color: #3f3a3a;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  color: #fff;
+
+}
+
+
+.episodeButton:hover, .characterName:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  
 }
 
