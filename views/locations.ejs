@@ -24,7 +24,7 @@
   <div class="paginationContainer">
     <% for(let i = 0; i < locals.info.pages; i++) { %>
     <input
-      class="paginationButton pageNumber"
+      class="paginationButton pageNumber <%= locals.info.currentPage == i + 1 ? 'active' : '' %>"
       type="submit"
       name="page"
       value="<%=i+1%>"
