@@ -214,16 +214,27 @@ app.post("/search", async (req, res) => {
   try {
     let searchProperty = req.body.searchProperty;
     let searchValue = req.body.searchValue;
-    let response = await axios.get(
-      `${BASEURL}${endpoints.characters}?${searchProperty}=${searchValue}`
-    );
+
+    let response = "";
+
+    //Check if the user wants to go to a specific page.
+    if ("page" in req.body) {
+      response = await axios.get(
+        `${BASEURL}${endpoints.characters}?page=${req.body.page}&${searchProperty}=${searchValue}`
+      );
+    } else {
+      response = await axios.get(
+        `${BASEURL}${endpoints.characters}?${searchProperty}=${searchValue}`
+      );
+    }
 
     response.data.info.pageTitle = `${searchProperty[0].toUpperCase()}${searchProperty
       .slice(1)
       .toLowerCase()} - ${searchValue}`;
-    // let currentPage = calculateCurrentPage(response.data.info);
-    // response.data.info.currentPage = currentPage;
-    console.log(response.data.info);
+    let currentPage = calculateCurrentPage(response.data.info);
+    response.data.info.currentPage = currentPage;
+    response.data.info.searchProperty = searchProperty;
+    response.data.info.searchValue = searchValue;
     res.render("filter-detail.ejs", {
       info: response.data.info,
       results: response.data.results,
