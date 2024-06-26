@@ -1,0 +1,6 @@
+<%- include('partials/header.ejs') %> <%if(locals.info && locals.results){%>
+<h1 class="pageTitle"><%= locals.info.pageTitle %></h1>
+
+<%} else {%>
+<p class="noContent">Not receiving content</p>
+<%}%> <%- include('partials/footer.ejs') %>
