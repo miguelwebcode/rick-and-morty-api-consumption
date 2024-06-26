@@ -53,6 +53,7 @@
 
 }
 .propertyContainer {
+  font-size: 18px;
   display: flex;
   height: 30px;
   flex-direction: row; /* Por defecto, pero lo incluimos para mayor claridad */
