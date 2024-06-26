@@ -23,6 +23,7 @@
             name="searchValue"
             value="<%=locals.character.status%>"
           />
+          <input type="hidden" name="endPoint" value="character" />
         </form>
       </div>
       <div class="propertyContainer">
@@ -40,6 +41,7 @@
             name="searchValue"
             value="<%=locals.character.species%>"
           />
+          <input type="hidden" name="endPoint" value="character" />
         </form>
       </div>
       <div class="propertyContainer">
@@ -57,6 +59,7 @@
             name="searchValue"
             value="<%=locals.character.gender%>"
           />
+          <input type="hidden" name="endPoint" value="character" />
         </form>
       </div>
       <div class="propertyContainer">
@@ -76,6 +79,7 @@
             name="locationId"
             value="<%=character.origin.id%>"
           />
+          <input type="hidden" name="endPoint" value="character" />
         </form>
         <%}%>
       </div>
@@ -96,6 +100,7 @@
             name="locationId"
             value="<%=character.location.id%>"
           />
+          <input type="hidden" name="endPoint" value="character" />
         </form>
         <%}%>
       </div>

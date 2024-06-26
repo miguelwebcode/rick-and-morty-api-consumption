@@ -214,17 +214,18 @@ app.post("/search", async (req, res) => {
   try {
     let searchProperty = req.body.searchProperty;
     let searchValue = req.body.searchValue;
-
+    let endPoint = req.body.endPoint;
+    console.log("End point: ", endPoint);
     let response = "";
 
     //Check if the user wants to go to a specific page.
     if ("page" in req.body) {
       response = await axios.get(
-        `${BASEURL}${endpoints.characters}?page=${req.body.page}&${searchProperty}=${searchValue}`
+        `${BASEURL}${endPoint}?page=${req.body.page}&${searchProperty}=${searchValue}`
       );
     } else {
       response = await axios.get(
-        `${BASEURL}${endpoints.characters}?${searchProperty}=${searchValue}`
+        `${BASEURL}${endPoint}?${searchProperty}=${searchValue}`
       );
     }
 
@@ -235,6 +236,7 @@ app.post("/search", async (req, res) => {
     response.data.info.currentPage = currentPage;
     response.data.info.searchProperty = searchProperty;
     response.data.info.searchValue = searchValue;
+    response.data.info.endPoint = endPoint;
     res.render("filter-detail.ejs", {
       info: response.data.info,
       results: response.data.results,
