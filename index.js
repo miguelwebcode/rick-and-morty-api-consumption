@@ -217,8 +217,13 @@ app.post("/search", async (req, res) => {
     let response = await axios.get(
       `${BASEURL}${endpoints.characters}?${searchProperty}=${searchValue}`
     );
+
+    response.data.info.pageTitle = `${searchProperty[0].toUpperCase()}${searchProperty
+      .slice(1)
+      .toLowerCase()} - ${searchValue}`;
     // let currentPage = calculateCurrentPage(response.data.info);
     // response.data.info.currentPage = currentPage;
+    console.log(response.data.info);
     res.render("filter-detail.ejs", {
       info: response.data.info,
       results: response.data.results,
