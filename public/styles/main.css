@@ -190,12 +190,9 @@ nav {
   list-style-type: none;
 }
 
-.episodeButton, .characterName {
-  padding: 0px;
-}
 
 
-.episodeButton, .characterName, .darkButton {
+.paginationButton, .darkButton {
   background-color: #3f3a3a;
   border: 1px solid #dcdcdc;
   border-radius: 8px;
@@ -210,8 +207,11 @@ nav {
   padding: 20px;
 }
 
+.paginationButton {
+  padding: 0px;
+}
 
-.episodeButton:hover, .characterName:hover, .darkButton:hover {
+.paginationButton:hover, .darkButton:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   
