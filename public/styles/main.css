@@ -176,6 +176,16 @@ nav {
   margin-bottom: 100px;
 }
 
+.locationsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+  margin-bottom: 100px;
+}
+
 .noPointsUl {
   list-style-type: none;
 }
@@ -184,7 +194,8 @@ nav {
   padding: 0px;
 }
 
-.episodeButton, .characterName {
+
+.episodeButton, .characterName, .locationButton {
   background-color: #3f3a3a;
   border: 1px solid #dcdcdc;
   border-radius: 8px;
@@ -193,11 +204,14 @@ nav {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
   color: #fff;
+}
 
+.locationButton {
+  padding: 20px;
 }
 
 
-.episodeButton:hover, .characterName:hover {
+.episodeButton:hover, .characterName:hover, .locationButton:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   

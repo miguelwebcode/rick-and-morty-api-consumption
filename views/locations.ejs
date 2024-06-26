@@ -1,31 +1,39 @@
 <%- include('partials/header.ejs') %>
 <h1 class="pageTitle">Locations</h1>
 <% if(locals.info && locals.results) {%>
-    <br>
-    <br>
-    <ul class="noPointsUl">
-        <div class="episodesContainer">
-            <% locals.results.forEach(location => { %>
-                <li>
-                    <form id="myForm" method="post" >
-                        <input class="episodeButton" type="submit" value="<%=location.name%>" formaction="/getLocationById">
-                        <input type="hidden" name="locationId" value= "<%=location.id%>">
-                    </form>
-                </li>
-            <% }); %>
-        </div>
-    </ul>
-    <form id="myForm" method="post">
-
-        <div class="paginationContainer">
-            <% for(let i = 0; i < locals.info.pages; i++) { %>
-                <input class="episodeButton pageNumber" type="submit" name="page" value="<%=i+1%>" formaction="/locations"  />
-            <% } %>
-        </div>
-    </form>
+<br />
+<br />
+<ul class="noPointsUl">
+  <div class="locationsContainer">
+    <% locals.results.forEach(location => { %>
+    <li>
+      <form id="myForm" method="post">
+        <input
+          class="locationButton"
+          type="submit"
+          value="<%=location.name%>"
+          formaction="/getLocationById"
+        />
+        <input type="hidden" name="locationId" value="<%=location.id%>" />
+      </form>
+    </li>
+    <% }); %>
+  </div>
+</ul>
+<form id="myForm" method="post">
+  <div class="paginationContainer">
+    <% for(let i = 0; i < locals.info.pages; i++) { %>
+    <input
+      class="episodeButton pageNumber"
+      type="submit"
+      name="page"
+      value="<%=i+1%>"
+      formaction="/locations"
+    />
+    <% } %>
+  </div>
+</form>
 
 <% } else { %>
 <p>Not receiving content</p>
-<% } %>
-
-<%- include('partials/footer.ejs') %>
+<% } %> <%- include('partials/footer.ejs') %>
