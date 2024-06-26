@@ -4,7 +4,21 @@
   <div class="detailData">
     <div class="propertyContainer">
       <p class="propertyParagraph">Type:</p>
-      <p class="dataParagraph"><%=locals.location.type%></p>
+      <form id="myForm" method="post">
+        <input
+          class="linkButton"
+          type="submit"
+          value="<%=locals.location.type%>"
+          formaction="/search"
+        />
+        <input type="hidden" name="searchProperty" value="type" />
+        <input
+          type="hidden"
+          name="searchValue"
+          value="<%=locals.location.type%>"
+        />
+        <input type="hidden" name="endPoint" value="location" />
+      </form>
     </div>
     <div class="propertyContainer">
       <p class="propertyParagraph">Dimension:</p>
