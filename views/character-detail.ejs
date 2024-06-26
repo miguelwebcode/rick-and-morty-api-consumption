@@ -27,7 +27,20 @@
       </div>
       <div class="propertyContainer">
         <p class="propertyParagraph">Species:</p>
-        <p class="dataParagraph"><%=locals.character.species%></p>
+        <form id="myForm" method="post">
+          <input
+            class="linkButton"
+            type="submit"
+            value="<%=locals.character.species%>"
+            formaction="/search"
+          />
+          <input type="hidden" name="searchProperty" value="species" />
+          <input
+            type="hidden"
+            name="searchValue"
+            value="<%=locals.character.species%>"
+          />
+        </form>
       </div>
       <div class="propertyContainer">
         <p class="propertyParagraph">Gender:</p>
