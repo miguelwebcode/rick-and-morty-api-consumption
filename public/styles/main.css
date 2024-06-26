@@ -226,3 +226,9 @@ nav {
 #myForm {
   margin-bottom: 100px;
 }
+
+.paginationButton.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
