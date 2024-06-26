@@ -248,11 +248,11 @@ function getArrayOfIds(array) {
 
 function calculateCurrentPage(info) {
   //Calculate the current page based on the next page url or previous page url.
-  let currentPage = 0;
+  let match = 0;
   if (info.next !== null) {
-    currentPage = Number(info.next.split("=").pop()) - 1;
+    match = Number(info.next.match(/\d+/)) - 1;
   } else if (info.prev !== null) {
-    currentPage = Number(info.prev.split("=").pop()) + 1;
+    match = Number(info.prev.match(/\d+/)) + 1;
   }
-  return currentPage;
+  return match;
 }
