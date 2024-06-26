@@ -1,19 +1,34 @@
 <%- include('partials/header.ejs') %>
 <h1 class="pageTitle">Web app that consumes the Rick and Morty API</h1>
-    
 
 <% if(locals.content) {%>
-    <form id="myForm" method="get">
-        <div class="container categoriesContainer">
-            <div class="row">
-                <input id="charactersInput" class="col-sm-12 col-md-8 category" type="submit" value="<%=content.characters.name %>" formaction="/characters" />
-                <input id="locationsInput" class="col-sm-12 col-md-8 category" type="submit" value="<%=content.locations.name %>" formaction="/locations" />
-                <input id="episodesInput" class="col-sm-12 col-md-8 category" type="submit" value="<%=content.episodes.name %>" formaction="/episodes" />
-            </div>
-        </div>
-    </form>
+<form id="myForm" method="get">
+  <div class="container mt-5 pt-5">
+    <div class="row categoriesContainer">
+      <input
+        id="charactersInput"
+        class="col-10 col-sm-7 col-md-3 mx-auto my-auto category"
+        type="submit"
+        value="<%=content.characters.name %>"
+        formaction="/characters"
+      />
+      <input
+        id="locationsInput"
+        class="col-10 col-sm-7 col-md-3 mx-auto my-auto category"
+        type="submit"
+        value="<%=content.locations.name %>"
+        formaction="/locations"
+      />
+      <input
+        id="episodesInput"
+        class="col-10 col-sm-7 col-md-3 mx-auto my-auto category"
+        type="submit"
+        value="<%=content.episodes.name %>"
+        formaction="/episodes"
+      />
+    </div>
+  </div>
+</form>
 <% } else { %>
 <p>Not receiving content</p>
-<% } %>
-
-<%- include('partials/footer.ejs') %>
+<% } %> <%- include('partials/footer.ejs') %>
