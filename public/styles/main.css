@@ -195,7 +195,7 @@ nav {
 }
 
 
-.episodeButton, .characterName, .locationButton {
+.episodeButton, .characterName, .darkButton {
   background-color: #3f3a3a;
   border: 1px solid #dcdcdc;
   border-radius: 8px;
@@ -206,12 +206,12 @@ nav {
   color: #fff;
 }
 
-.locationButton {
+.darkButton {
   padding: 20px;
 }
 
 
-.episodeButton:hover, .characterName:hover, .locationButton:hover {
+.episodeButton:hover, .characterName:hover, .darkButton:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   

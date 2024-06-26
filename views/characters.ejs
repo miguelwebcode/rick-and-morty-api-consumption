@@ -1,31 +1,43 @@
 <%- include('partials/header.ejs') %>
 <h1 class="pageTitle">Characters</h1>
 <% if(locals.info && locals.results) {%>
-        <div class="charactersContainer">
-            <% locals.results.forEach(character => { %>
-                    <div class="characterDiv">
-                        <img class="characterImage" src="<%=character.image%>" alt="<%=character.name%>">
-                        <form id="myForm" method="post" >
-                            <input type="submit" class="characterName" value="<%=character.name%>" formaction="/getCharacterById">
-                            <input type="hidden" name="characterId" value= "<%=character.id%>">
-                        </form>
-                    </div>
-
-            <% }); %>
-        </div>
-        <br>
-        <br>
-    <form id="pagination" method="post">
-
-        <div class="paginationContainer">
-            <% for(let i = 0; i < locals.info.pages; i++) { %>
-                <input class="episodeButton pageNumber" type="submit" name="page" value="<%=i+1%>" formaction="/characters"  />
-            <% } %>
-        </div>
+<div class="charactersContainer">
+  <% locals.results.forEach(character => { %>
+  <div class="characterDiv">
+    <img
+      class="characterImage"
+      src="<%=character.image%>"
+      alt="<%=character.name%>"
+    />
+    <form id="myForm" method="post">
+      <input
+        type="submit"
+        class="darkButton"
+        value="<%=character.name%>"
+        formaction="/getCharacterById"
+      />
+      <input type="hidden" name="characterId" value="<%=character.id%>" />
     </form>
+  </div>
+
+  <% }); %>
+</div>
+<br />
+<br />
+<form id="pagination" method="post">
+  <div class="paginationContainer">
+    <% for(let i = 0; i < locals.info.pages; i++) { %>
+    <input
+      class="episodeButton pageNumber"
+      type="submit"
+      name="page"
+      value="<%=i+1%>"
+      formaction="/characters"
+    />
+    <% } %>
+  </div>
+</form>
 
 <% } else { %>
 <p>Not receiving content</p>
-<% } %>
-
-<%- include('partials/footer.ejs') %>
+<% } %> <%- include('partials/footer.ejs') %>
