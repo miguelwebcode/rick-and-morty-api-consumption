@@ -210,6 +210,24 @@ app.post("/getEpisodeById", async (req, res) => {
   }
 });
 
+app.post("/search", async (req, res) => {
+  try {
+    let searchProperty = req.body.searchProperty;
+    let searchValue = req.body.searchValue;
+    let response = await axios.get(
+      `${BASEURL}${endpoints.characters}?${searchProperty}=${searchValue}`
+    );
+    // let currentPage = calculateCurrentPage(response.data.info);
+    // response.data.info.currentPage = currentPage;
+    res.render("filter-detail.ejs", {
+      info: response.data.info,
+      results: response.data.results,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
