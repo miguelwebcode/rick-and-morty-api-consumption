@@ -1,58 +1,86 @@
-<%- include('partials/header.ejs') %>
-<%if(locals.character){%>
-    <div class="characterDetailBody">
-        <div class="characterDetailContainer">
-            <h1><%=locals.character.name%></h1>
-            <img class="characterDetailImg" src="<%=locals.character.image%>" alt="<%=locals.character.name%>">
-            <div class="characterData">
-                <div class="propertyContainer">
-                    <p class="propertyParagraph">Status: </p><p class="dataParagraph"><%=locals.character.status%></p>
-                </div>
-                <div class="propertyContainer">
-                    <p class="propertyParagraph">Species: </p><p class="dataParagraph"><%=locals.character.species%></p>
-                </div>
-                <div class="propertyContainer">
-                    <p class="propertyParagraph">Gender: </p><p class="dataParagraph"><%=locals.character.gender%></p>
-                </div>
-                <div class="propertyContainer">
-                    <p class="propertyParagraph">Origin: </p>
-                    <% if(character.origin.name === "Unknown") { %>
-                        <p class="unknownLocation">Unknown</p>   
-                    <% } else {%>
-                        <form id="myForm" method="post" >
-                            <input class="linkButton" type="submit" value="<%=character.origin.name%>" formaction="/getLocationById">
-                            <input type="hidden" name="locationId" value= "<%=character.origin.id%>">
-                        </form>
-                    <%}%>
-                </div>
-                <div class="propertyContainer">
-                    <p class="propertyParagraph">Location:</p>
-                    <% if(character.location.name === "Unknown") { %>
-                        <p class="unknownLocation">Unknown</p>   
-                    <% } else {%>
-                        <form id="myForm" method="post" >
-                            <input class="linkButton" type="submit" value="<%=character.location.name%>" formaction="/getLocationById">
-                            <input type="hidden" name="locationId" value= "<%=character.location.id%>">
-                        </form>
-                    <%}%>
-                </div>                
-            </div>
-        </div>
+<%- include('partials/header.ejs') %> <%if(locals.character){%>
+<div class="characterDetailBody">
+  <div class="characterDetailContainer">
+    <h1><%=locals.character.name%></h1>
+    <img
+      class="characterDetailImg"
+      src="<%=locals.character.image%>"
+      alt="<%=locals.character.name%>"
+    />
+    <div class="characterData">
+      <div class="propertyContainer">
+        <p class="propertyParagraph">Status:</p>
+        <p class="dataParagraph"><%=locals.character.status%></p>
+      </div>
+      <div class="propertyContainer">
+        <p class="propertyParagraph">Species:</p>
+        <p class="dataParagraph"><%=locals.character.species%></p>
+      </div>
+      <div class="propertyContainer">
+        <p class="propertyParagraph">Gender:</p>
+        <p class="dataParagraph"><%=locals.character.gender%></p>
+      </div>
+      <div class="propertyContainer">
+        <p class="propertyParagraph">Origin:</p>
+        <% if(character.origin.name === "Unknown") { %>
+        <p class="unknownLocation">Unknown</p>
+        <% } else {%>
+        <form id="myForm" method="post">
+          <input
+            class="linkButton"
+            type="submit"
+            value="<%=character.origin.name%>"
+            formaction="/getLocationById"
+          />
+          <input
+            type="hidden"
+            name="locationId"
+            value="<%=character.origin.id%>"
+          />
+        </form>
+        <%}%>
+      </div>
+      <div class="propertyContainer">
+        <p class="propertyParagraph">Location:</p>
+        <% if(character.location.name === "Unknown") { %>
+        <p class="unknownLocation">Unknown</p>
+        <% } else {%>
+        <form id="myForm" method="post">
+          <input
+            class="linkButton"
+            type="submit"
+            value="<%=character.location.name%>"
+            formaction="/getLocationById"
+          />
+          <input
+            type="hidden"
+            name="locationId"
+            value="<%=character.location.id%>"
+          />
+        </form>
+        <%}%>
+      </div>
     </div>
-    <p class="pageSubtitle">Episodes: </p>
-    <ul class="noPointsUl">
-        <div class="episodesContainer">
-            <%locals.character.episode.forEach(episode => {%>
-                <li>
-                    <form id="myForm" method="post" >
-                        <input class="episodeButton" type="submit" value="<%= episode.id%>: <%=episode.name%>" formaction="/getEpisodeById">
-                        <input type="hidden" name="episodeId" value= "<%=episode.id%>">
-                    </form>
-                </li>
-            <%});%>
-        </div>
-    </ul>
+  </div>
+</div>
+<p class="pageSubtitle">Episodes:</p>
+<ul class="noPointsUl">
+  <div class="episodesContainer">
+    <%locals.character.episode.forEach(episode => {%>
+    <li>
+      <form id="myForm" method="post">
+        <input
+          class="darkButton"
+          type="submit"
+          value="<%= episode.id%>: <%=episode.name%>"
+          formaction="/getEpisodeById"
+        />
+        <input type="hidden" name="episodeId" value="<%=episode.id%>" />
+      </form>
+    </li>
+    <%});%>
+  </div>
+</ul>
 <%} else {%>
-    <p>Not receiving content</p>
-<%}%>
-<%- include('partials/footer.ejs') %>
+<p>Not receiving content</p>
+<%}%> <%- include('partials/footer.ejs') %>
