@@ -22,7 +22,21 @@
     </div>
     <div class="propertyContainer">
       <p class="propertyParagraph">Dimension:</p>
-      <p class="dataParagraph"><%=locals.location.dimension%></p>
+      <form id="myForm" method="post">
+        <input
+          class="linkButton"
+          type="submit"
+          value="<%=locals.location.dimension%>"
+          formaction="/search"
+        />
+        <input type="hidden" name="searchProperty" value="dimension" />
+        <input
+          type="hidden"
+          name="searchValue"
+          value="<%=locals.location.dimension%>"
+        />
+        <input type="hidden" name="endPoint" value="location" />
+      </form>
     </div>
   </div>
 </div>
