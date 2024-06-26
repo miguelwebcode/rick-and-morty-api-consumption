@@ -62,6 +62,8 @@ app.get("/characters", async (req, res) => {
 app.get("/locations", async (req, res) => {
   try {
     let response = await axios.get(`${BASEURL}${endpoints.locations}`);
+    let currentPage = calculateCurrentPage(response.data.info);
+    response.data.info.currentPage = currentPage;
     res.render("locations.ejs", {
       info: response.data.info,
       results: response.data.results,
@@ -74,6 +76,8 @@ app.get("/locations", async (req, res) => {
 app.get("/episodes", async (req, res) => {
   try {
     let response = await axios.get(`${BASEURL}${endpoints.episodes}`);
+    let currentPage = calculateCurrentPage(response.data.info);
+    response.data.info.currentPage = currentPage;
     res.render("episodes.ejs", {
       info: response.data.info,
       results: response.data.results,
@@ -103,6 +107,8 @@ app.post("/characters", async (req, res) => {
 app.post("/locations", async (req, res) => {
   try {
     const pageNumber = req.body.page;
+    let currentPage = calculateCurrentPage(response.data.info);
+    response.data.info.currentPage = currentPage;
     let response = await axios.get(
       `${BASEURL}${endpoints.locations}/?page=${pageNumber}`
     );
@@ -118,6 +124,8 @@ app.post("/locations", async (req, res) => {
 app.post("/episodes", async (req, res) => {
   try {
     const pageNumber = req.body.page;
+    let currentPage = calculateCurrentPage(response.data.info);
+    response.data.info.currentPage = currentPage;
     let response = await axios.get(
       `${BASEURL}${endpoints.episodes}/?page=${pageNumber}`
     );
