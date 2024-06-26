@@ -13,6 +13,7 @@
   </div>
 </div>
 <p class="pageSubtitle">Residents:</p>
+<%if(locals.location.residents.length > 0){%>
 <ul class="noPointsUl">
   <div class="episodesContainer">
     <% locals.location.residents.forEach(resident => { %>
@@ -37,6 +38,8 @@
     <% }); %>
   </div>
 </ul>
-<%} else {%>
-<p>Not receiving content</p>
+<% } else { %>
+<p class="noContent">No residents</p>
+<% } %> <%} else {%>
+<p class="noContent">Not receiving content</p>
 <%}%> <%- include('partials/footer.ejs') %>
