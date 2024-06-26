@@ -2,23 +2,41 @@
 <h1 class="pageTitle"><%= locals.info.pageTitle%></h1>
 <% if(locals.info && locals.results) {%>
 <div class="charactersContainer">
-  <% locals.results.forEach(character => { %>
-  <div class="characterDiv">
-    <img
-      class="characterImage"
-      src="<%=character.image%>"
-      alt="<%=character.name%>"
-    />
-    <form id="myForm" method="post">
-      <input
-        type="submit"
-        class="darkButton"
-        value="<%=character.name%>"
-        formaction="/getCharacterById"
-      />
-      <input type="hidden" name="characterId" value="<%=character.id%>" />
-    </form>
-  </div>
+  <% locals.results.forEach(element => { %>
+   <% if(locals.info.endPoint == "character") {%>
+    <div class="characterDiv">
+        <img
+          class="characterImage"
+          src="<%=element.image%>"
+          alt="<%=element.name%>"
+        />
+        <form id="myForm" method="post">
+          <input
+            type="submit"
+            class="darkButton"
+            value="<%=element.name%>"
+            formaction="/getCharacterById"
+          />
+          <input type="hidden" name="characterId" value="<%=element.id%>" />
+        </form>
+      </div>
+    <% } %>
+
+    <% if(locals.info.endPoint == "location") {%>
+        <div class="characterDiv">
+
+            <form id="myForm" method="post">
+              <input
+                type="submit"
+                class="darkButton"
+                value="<%=element.name%>"
+                formaction="/getLocationById"
+              />
+              <input type="hidden" name="locationId" value="<%=element.id%>" />
+            </form>
+          </div>
+        <% } %>
+  
 
   <% }); %>
 </div>
