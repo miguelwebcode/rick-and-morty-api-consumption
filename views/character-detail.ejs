@@ -14,14 +14,16 @@
           <input
             class="linkButton"
             type="submit"
-            value="<%=locals.character.status%>"
+            value="<%=`${character.status[0].toUpperCase()}${character.status
+              .slice(1)}`%>"
             formaction="/search"
           />
           <input type="hidden" name="searchProperty" value="status" />
           <input
             type="hidden"
             name="searchValue"
-            value="<%=locals.character.status%>"
+            value="<%=`${character.status[0].toUpperCase()}${character.status
+              .slice(1)}`%>"
           />
           <input type="hidden" name="endPoint" value="character" />
         </form>
@@ -32,14 +34,16 @@
           <input
             class="linkButton"
             type="submit"
-            value="<%=locals.character.species%>"
+            value="<%=`${character.species[0].toUpperCase()}${character.species
+              .slice(1)}`%>"
             formaction="/search"
           />
           <input type="hidden" name="searchProperty" value="species" />
           <input
             type="hidden"
             name="searchValue"
-            value="<%=locals.character.species%>"
+            value="<%=`${character.species[0].toUpperCase()}${character.species
+              .slice(1)}`%>"
           />
           <input type="hidden" name="endPoint" value="character" />
         </form>
@@ -50,22 +54,24 @@
           <input
             class="linkButton"
             type="submit"
-            value="<%=locals.character.gender%>"
+            value="<%=`${character.gender[0].toUpperCase()}${character.gender
+              .slice(1)}`%>"
             formaction="/search"
           />
           <input type="hidden" name="searchProperty" value="gender" />
           <input
             type="hidden"
             name="searchValue"
-            value="<%=locals.character.gender%>"
+            value="<%=`${character.gender[0].toUpperCase()}${character.gender
+              .slice(1)}`%>"
           />
           <input type="hidden" name="endPoint" value="character" />
         </form>
       </div>
       <div class="propertyContainer">
         <p class="propertyParagraph">Origin:</p>
-        <% if(character.origin.name === "Unknown") { %>
-        <p class="unknownLocation">Unknown</p>
+        <% if(character.origin.name === "unknown") { %>
+        <p class="unknownData">Unknown</p>
         <% } else {%>
         <form id="myForm" method="post">
           <input
@@ -85,8 +91,8 @@
       </div>
       <div class="propertyContainer">
         <p class="propertyParagraph">Location:</p>
-        <% if(character.location.name === "Unknown") { %>
-        <p class="unknownLocation">Unknown</p>
+        <% if(character.location.name === "unknown") { %>
+        <p class="unknownData">Unknown</p>
         <% } else {%>
         <form id="myForm" method="post">
           <input
