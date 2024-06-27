@@ -143,33 +143,43 @@ app.post("/getCharacterById", async (req, res) => {
     let response = await axios.get(
       `${BASEURL}${endpoints.characters}/${req.body.characterId}`
     );
+
+    //Get the episode numbers from the character object.
     let arrayOfEpisodeNumbers = getArrayOfIds(response.data.episode);
+    //Get the episodes based on the episode numbers.
     let getMultipleEpisodes = await axios.get(
       `${BASEURL}${endpoints.episodes}/${arrayOfEpisodeNumbers}`
     );
+    //Add the episodes to the response object.
     response.data.episode = getMultipleEpisodes.data;
+
     //Check if response.data.episode is array
     if (!Array.isArray(response.data.episode)) {
       response.data.episode = [response.data.episode];
     }
 
+    //Get the location and origin id from the response object.
     let locationId = response.data.location.url.split("/").pop();
     let originId = response.data.origin.url.split("/").pop();
-    let getLocation = await axios.get(
-      `${BASEURL}${endpoints.locations}/${locationId}`
-    );
-    let getOrigin = await axios.get(
-      `${BASEURL}${endpoints.locations}/${originId}`
-    );
-    if (response.data.location.name === "unknown") {
-      response.data.location.name = "Unknown";
-    } else {
-      response.data.location = getLocation.data;
-    }
-    if (response.data.origin.name === "unknown") {
-      response.data.origin.name = "Unknown";
-    } else {
+
+    //Check if the location and origin name is unknown.
+    if (response.data.origin.name !== "unknown") {
+      //Get the origin location based on the origin id.
+      let getOrigin = await axios.get(
+        `${BASEURL}${endpoints.locations}/${originId}`
+      );
+      //Add the origin location to the response object.
       response.data.origin = getOrigin.data;
+    }
+
+    //Check if the location name is unknown.
+    if (response.data.location.name !== "unknown") {
+      //Get the location based on the location id.
+      let getLocation = await axios.get(
+        `${BASEURL}${endpoints.locations}/${locationId}`
+      );
+      //Add the location to the response object.
+      response.data.location = getLocation.data;
     }
 
     res.render("character-detail.ejs", { character: response.data });
